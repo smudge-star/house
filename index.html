@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>明居置业 · 找到理想家</title>
+<title>明居置業 · 找到理想家</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -13,22 +13,22 @@
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; overflow-x: hidden; }
 
-  /* NAV */
-  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,26,0.96); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; }
-  .nav-logo { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
+  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,26,0.96); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 56px; gap: 8px; }
+  .nav-logo { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 700; color: var(--gold); letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
   .nav-logo span { color: var(--white); font-weight: 400; }
-  .nav-tabs { display: flex; }
-  .nav-tab { padding: 8px 14px; font-size: 13px; color: rgba(255,255,255,0.6); cursor: pointer; border-bottom: 2px solid transparent; }
+  .nav-right { display: flex; align-items: center; gap: 2px; }
+  .nav-tab { padding: 6px 9px; font-size: 12px; color: rgba(255,255,255,0.6); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
   .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .lang-switcher { display: flex; background: rgba(255,255,255,0.08); border-radius: 20px; padding: 3px; gap: 1px; margin-left: 6px; }
+  .lang-btn { padding: 4px 7px; border-radius: 14px; font-size: 10px; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; white-space: nowrap; border: none; background: none; font-family: 'Noto Sans SC', sans-serif; }
+  .lang-btn.active { background: var(--gold); color: var(--dark); font-weight: 600; }
 
-  /* SCREENS */
   .screen { display: none; padding-top: 56px; min-height: 100vh; }
   .screen.active { display: block; }
 
-  /* HERO */
   .hero { background: linear-gradient(160deg, #1A1A1A 0%, #2C2416 60%, #3D2E12 100%); padding: 48px 24px 40px; position: relative; overflow: hidden; }
   .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(201,169,110,0.15) 0%, transparent 70%); }
-  .hero-tag { display: inline-block; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); color: var(--gold); font-size: 11px; letter-spacing: 3px; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+  .hero-tag { display: inline-block; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); color: var(--gold); font-size: 11px; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
   .hero h1 { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--white); line-height: 1.4; margin-bottom: 10px; }
   .hero h1 em { color: var(--gold); font-style: normal; }
   .hero p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 24px; }
@@ -38,7 +38,6 @@
   .stat-num { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; color: var(--gold); }
   .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
 
-  /* FILTER */
   .filter-bar { padding: 16px 20px 8px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
   .filter-bar::-webkit-scrollbar { display: none; }
   .filter-btn { flex-shrink: 0; padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); font-size: 12px; color: var(--soft); cursor: pointer; font-family: 'Noto Sans SC', sans-serif; }
@@ -56,13 +55,10 @@
   .error-icon { font-size: 40px; margin-bottom: 12px; }
   .error-text { font-size: 13px; color: var(--soft); line-height: 1.8; }
 
-  /* PROPERTY CARDS */
   .properties { padding: 0 16px 24px; display: flex; flex-direction: column; gap: 16px; }
   .prop-card { background: var(--card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); cursor: pointer; animation: fadeUp 0.4s ease both; }
   .prop-card:active { transform: scale(0.98); }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* 列表页封面图（只展示第一张） */
   .prop-cover { width: 100%; height: 200px; position: relative; overflow: hidden; background: #eee; }
   .prop-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .prop-cover-placeholder { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 56px; }
@@ -70,9 +66,7 @@
   .badge-sale { background: #3D1A0D; color: #E07B54; }
   .badge-rent { background: #1B4332; color: #52B788; }
   .badge-new  { background: #1A1A1A; color: #C9A96E; }
-  /* 图片数量角标 */
   .photo-count { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.55); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 10px; display: flex; align-items: center; gap: 4px; }
-
   .prop-body { padding: 16px; }
   .prop-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
   .prop-address { font-size: 12px; color: var(--soft); margin-bottom: 12px; }
@@ -83,29 +77,21 @@
   .prop-price span { font-size: 12px; font-weight: 400; color: var(--soft); }
   .prop-area { font-size: 12px; color: var(--soft); }
 
-  /* ===== 详情页轮播 ===== */
   .detail-header { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; background: rgba(26,26,26,0.96); height: 56px; padding: 0 16px; gap: 12px; }
   .back-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--white); flex-shrink: 0; }
   .detail-header-title { font-size: 15px; color: var(--white); font-family: 'Noto Serif SC', serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-  /* 轮播容器 */
   .carousel { width: 100%; height: 260px; position: relative; overflow: hidden; background: #222; touch-action: pan-y; }
   .carousel-track { display: flex; height: 100%; transition: transform 0.35s ease; will-change: transform; }
   .carousel-slide { flex-shrink: 0; width: 100%; height: 100%; }
   .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; -webkit-user-drag: none; }
   .carousel-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 72px; }
-
-  /* 轮播指示点 */
   .carousel-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
   .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: all 0.2s; cursor: pointer; }
   .carousel-dot.active { background: var(--white); width: 18px; border-radius: 3px; }
-
-  /* 左右箭头（图片多于1张时显示） */
   .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; background: rgba(0,0,0,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 18px; border: none; z-index: 10; }
   .carousel-btn.prev { left: 10px; }
   .carousel-btn.next { right: 10px; }
   .carousel-counter { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.5); color: #fff; font-size: 12px; padding: 3px 10px; border-radius: 10px; }
-
   .detail-content { padding: 20px; }
   .detail-title { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
   .detail-price { font-size: 26px; font-weight: 700; color: #C0392B; margin-bottom: 16px; }
@@ -123,7 +109,6 @@
   .btn-primary { flex: 1; padding: 14px; background: var(--dark); color: var(--gold); border: none; border-radius: 10px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Noto Sans SC', sans-serif; letter-spacing: 1px; }
   .btn-secondary { flex: 1; padding: 14px; background: var(--white); color: var(--dark); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; cursor: pointer; font-family: 'Noto Sans SC', sans-serif; }
 
-  /* CONTACT */
   .contact-hero { background: linear-gradient(160deg, #1A1A1A 0%, #2C2416 100%); padding: 40px 24px 32px; }
   .contact-hero h2 { font-family: 'Noto Serif SC', serif; font-size: 24px; color: var(--white); margin-bottom: 8px; }
   .contact-hero p { font-size: 13px; color: rgba(255,255,255,0.5); }
@@ -136,7 +121,6 @@
   .contact-value { font-size: 15px; font-weight: 500; }
   .contact-arrow { font-size: 18px; color: var(--soft); }
 
-  /* BOTTOM NAV */
   .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,26,0.97); backdrop-filter: blur(12px); display: flex; height: 60px; border-top: 1px solid rgba(255,255,255,0.08); }
   .bnav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; gap: 3px; }
   .bnav-icon { font-size: 20px; line-height: 1; }
@@ -148,38 +132,41 @@
 <body>
 
 <nav class="navbar" id="mainNav">
-  <!-- ★ 改这里：公司名称 -->
-  <div class="nav-logo">明居<span>置业</span></div>
-  <div class="nav-tabs">
-    <div class="nav-tab active" onclick="showTab('home')">房源</div>
-    <div class="nav-tab" onclick="showTab('contact')">联系我们</div>
+  <div class="nav-logo" id="nav-logo">明居<span>置業</span></div>
+  <div class="nav-right">
+    <div class="nav-tab active" id="nav-tab-home" onclick="showTab('home')">房源</div>
+    <div class="nav-tab" id="nav-tab-contact" onclick="showTab('contact')">聯絡我們</div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('tw')">繁</button>
+      <button class="lang-btn" onclick="setLang('cn')">简</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
   </div>
 </nav>
 
 <!-- 房源列表页 -->
 <div class="screen active pb-nav" id="screen-home">
   <div class="hero">
-    <!-- ★ 改这里：首页文案和统计数字 -->
-    <div class="hero-tag">🏡 专业房产服务</div>
-    <h1>在这里找到<br><em>您的理想居所</em></h1>
-    <p>精选优质房源，专业顾问一对一服务，让您的置业之路更简单、更放心。</p>
+    <div class="hero-tag" id="hero-tag">🏡 專業房產服務</div>
+    <h1 id="hero-title">在這裡找到<br><em>您的理想居所</em></h1>
+    <p id="hero-desc">精選優質房源，專業顧問一對一服務，讓您的置業之路更簡單、更放心。</p>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num">200+</div><div class="stat-label">在售房源</div></div>
-      <div class="stat"><div class="stat-num">8年</div><div class="stat-label">从业经验</div></div>
-      <div class="stat"><div class="stat-num">98%</div><div class="stat-label">客户好评</div></div>
+      <div class="stat"><div class="stat-num">200+</div><div class="stat-label" id="stat1-label">在售房源</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label" id="stat2-label">年從業經驗</div></div>
+      <div class="stat"><div class="stat-num">98%</div><div class="stat-label" id="stat3-label">客戶好評</div></div>
     </div>
   </div>
   <div class="filter-bar" id="filter-bar">
-    <button class="filter-btn active" onclick="filterProps(this,'全部')">全部</button>
+    <button class="filter-btn active" data-filter="ALL" onclick="filterProps(this,'ALL')">全部</button>
   </div>
   <div class="section-header">
-    <div class="section-title">精选房源</div>
-    <div class="section-sub" id="prop-count">加载中...</div>
+    <div class="section-title" id="section-title">精選房源</div>
+    <div class="section-sub" id="prop-count">載入中...</div>
   </div>
   <div id="prop-list">
     <div class="loading-state">
       <div class="loading-spinner"></div>
-      <div class="loading-text">正在加载房源...</div>
+      <div class="loading-text">正在載入房源...</div>
     </div>
   </div>
 </div>
@@ -187,31 +174,27 @@
 <!-- 联系我们页 -->
 <div class="screen pb-nav" id="screen-contact">
   <div class="contact-hero">
-    <h2>联系我们</h2>
-    <p>专业顾问随时为您解答，期待与您合作</p>
+    <h2 id="contact-title">聯絡我們</h2>
+    <p id="contact-sub">專業顧問隨時為您解答，期待與您合作</p>
   </div>
   <div class="contact-cards">
-    <!-- ★ 改这里：换成你的电话 -->
     <a class="contact-card" href="tel:97839116">
       <div class="contact-icon">📞</div>
       <div class="contact-info">
-        <div class="contact-label">电话（WhatsApp同号）</div>
-        <div class="contact-value">（852）97839116</div>
+        <div class="contact-label" id="label-phone">電話（WhatsApp同號）</div>
+        <div class="contact-value">（852）9783 9116</div>
       </div>
       <div class="contact-arrow">›</div>
     </a>
-    <!-- ★ 改这里：换成你的微信号（两处） -->
-    <a class="contact-card" href="#" onclick="alert('微信号：youjufangchan\n长按复制后在微信搜索添加'); return false;">
+    <a class="contact-card" href="#" onclick="alert('WeChat: sandyhuitd'); return false;">
       <div class="contact-icon">💬</div>
       <div class="contact-info">
-        <div class="contact-label">微信</div>
+        <div class="contact-label" id="label-wechat">微信</div>
         <div class="contact-value">sandyhuitd</div>
       </div>
       <div class="contact-arrow">›</div>
     </a>
-
-    
-    <a class="contact-card" href="email:luminaproperties@yahoo.com">
+    <a class="contact-card" href="mailto:luminaproperties@yahoo.com">
       <div class="contact-icon">✉️</div>
       <div class="contact-info">
         <div class="contact-label">Email</div>
@@ -219,23 +202,22 @@
       </div>
       <div class="contact-arrow">›</div>
     </a>
-    <!-- ★ 改这里：换成你的地址（不需要可以删掉整个 <a> 块） -->
     <a class="contact-card" href="#">
       <div class="contact-icon">📍</div>
       <div class="contact-info">
-        <div class="contact-label">门店地址</div>
-        <div class="contact-value">香港坚尼地城西祥街2号宝翠阁A座地铺4C</div>
+        <div class="contact-label" id="label-address">地址</div>
+        <div class="contact-value" id="address-value">香港堅尼地城西祥街2號寶翠閣A座地鋪4C</div>
       </div>
       <div class="contact-arrow">›</div>
     </a>
   </div>
 </div>
 
-<!-- 房源详情页 -->
+<!-- 详情页 -->
 <div class="screen pb-nav" id="screen-detail">
   <div class="detail-header">
     <div class="back-btn" onclick="backToList()">‹</div>
-    <div class="detail-header-title" id="detail-nav-title">房源详情</div>
+    <div class="detail-header-title" id="detail-nav-title"></div>
   </div>
   <div id="detail-body" style="padding-top:0;"></div>
 </div>
@@ -243,88 +225,237 @@
 <!-- 底部导航 -->
 <div class="bottom-nav">
   <div class="bnav-item active" id="bnav-home" onclick="showTab('home')">
-    <div class="bnav-icon">🏠</div><div class="bnav-label">房源</div>
+    <div class="bnav-icon">🏠</div>
+    <div class="bnav-label" id="bnav-label-home">房源</div>
   </div>
   <div class="bnav-item" id="bnav-contact" onclick="showTab('contact')">
-    <div class="bnav-icon">📞</div><div class="bnav-label">联系我们</div>
+    <div class="bnav-icon">📞</div>
+    <div class="bnav-label" id="bnav-label-contact">聯絡我們</div>
   </div>
 </div>
 
 <script>
-// ============================================================
-// ★ 把下面换成你的 Google Apps Script 部署网址
-// ============================================================
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbys9ruWVge4OeIDXRe9bvKBVa5Wb1WGdRq6SzMr0DsR6tSIM2f_qMbp1Cz-6-jKJ-wF/exec";
 
-// ---- 以下不需要修改 ----
-let allProperties = [];
+// ============================================================
+// 翻译字典
+// ============================================================
+const i18n = {
+  tw: {
+    logo:           ['明居', '置業'],
+    title:          '明居置業 · 找到理想家',
+    nav_home:       '房源',
+    nav_contact:    '聯絡我們',
+    hero_tag:       '🏡 專業房產服務',
+    hero_title:     '在這裡找到<br><em>您的理想居所</em>',
+    hero_desc:      '精選優質房源，專業顧問一對一服務，讓您的置業之路更簡單、更放心。',
+    stat1:          '在售房源',
+    stat2:          '年從業經驗',
+    stat3:          '客戶好評',
+    section:        '精選房源',
+    count:          n => `共 ${n} 套`,
+    filter_all:     '全部',
+    contact_title:  '聯絡我們',
+    contact_sub:    '專業顧問隨時為您解答，期待與您合作',
+    label_phone:    '電話（WhatsApp同號）',
+    label_wechat:   '微信',
+    label_address:  '地址',
+    address:        '香港堅尼地城西祥街2號寶翠閣A座地鋪4C',
+    detail_area:    '建築面積',
+    detail_floor:   '樓層',
+    detail_year:    '建成年份',
+    detail_orient:  '朝向',
+    detail_desc:    '房源描述',
+    detail_feat:    '配套設施',
+    btn_enquire:    '📞 立即查詢',
+    btn_back:       '← 返回列表',
+    no_data:        '暫無符合條件的房源',
+    err:            '資料載入失敗，請檢查設定',
+  },
+  cn: {
+    logo:           ['明居', '置业'],
+    title:          '明居置业 · 找到理想家',
+    nav_home:       '房源',
+    nav_contact:    '联系我们',
+    hero_tag:       '🏡 专业房产服务',
+    hero_title:     '在这里找到<br><em>您的理想居所</em>',
+    hero_desc:      '精选优质房源，专业顾问一对一服务，让您的置业之路更简单、更放心。',
+    stat1:          '在售房源',
+    stat2:          '年从业经验',
+    stat3:          '客户好评',
+    section:        '精选房源',
+    count:          n => `共 ${n} 套`,
+    filter_all:     '全部',
+    contact_title:  '联系我们',
+    contact_sub:    '专业顾问随时为您解答，期待与您合作',
+    label_phone:    '电话（WhatsApp同号）',
+    label_wechat:   '微信',
+    label_address:  '地址',
+    address:        '香港坚尼地城西祥街2号宝翠阁A座地铺4C',
+    detail_area:    '建筑面积',
+    detail_floor:   '楼层',
+    detail_year:    '建成年份',
+    detail_orient:  '朝向',
+    detail_desc:    '房源描述',
+    detail_feat:    '配套设施',
+    btn_enquire:    '📞 立即咨询',
+    btn_back:       '← 返回列表',
+    no_data:        '暂无符合条件的房源',
+    err:            '数据加载失败，请检查设置',
+  },
+  en: {
+    logo:           ['Lumina', ' Properties'],
+    title:          'Lumina Properties · Your Dream Home',
+    nav_home:       'Listings',
+    nav_contact:    'Contact',
+    hero_tag:       '🏡 Professional Property Services',
+    hero_title:     'Find Your<br><em>Dream Home Here</em>',
+    hero_desc:      'Curated quality listings with dedicated one-on-one advisor service — making your property journey simple and stress-free.',
+    stat1:          'Listings',
+    stat2:          'Yrs Experience',
+    stat3:          'Client Satisfaction',
+    section:        'Featured Listings',
+    count:          n => `${n} listing${n !== 1 ? 's' : ''}`,
+    filter_all:     'All',
+    contact_title:  'Contact Us',
+    contact_sub:    'Our advisors are ready to help. We look forward to working with you.',
+    label_phone:    'Phone (WhatsApp)',
+    label_wechat:   'WeChat',
+    label_address:  'Office Address',
+    address:        'Shop 4C, Block A, Belcher Court, 2 Sai Cheung St, Kennedy Town, HK',
+    detail_area:    'Floor Area',
+    detail_floor:   'Floor',
+    detail_year:    'Year Built',
+    detail_orient:  'Orientation',
+    detail_desc:    'Description',
+    detail_feat:    'Amenities',
+    btn_enquire:    '📞 Enquire Now',
+    btn_back:       '← Back to Listings',
+    no_data:        'No listings found.',
+    err:            'Failed to load data. Please check configuration.',
+  },
+};
 
+let currentLang = 'tw';
+let allProperties = [];
+let carouselIndex = 0;
+let carouselImages = [];
+let touchStartX = 0;
+let touchStartY = 0;
+
+// ============================================================
+// 切换语言
+// ============================================================
+function setLang(lang) {
+  currentLang = lang;
+  const t = i18n[lang];
+
+  // 语言按钮状态
+  document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', ['tw','cn','en'][i] === lang);
+  });
+
+  // 静态文字
+  document.title = t.title;
+  document.getElementById('nav-logo').innerHTML = `${t.logo[0]}<span>${t.logo[1]}</span>`;
+  document.getElementById('nav-tab-home').textContent = t.nav_home;
+  document.getElementById('nav-tab-contact').textContent = t.nav_contact;
+  document.getElementById('hero-tag').textContent = t.hero_tag;
+  document.getElementById('hero-title').innerHTML = t.hero_title;
+  document.getElementById('hero-desc').textContent = t.hero_desc;
+  document.getElementById('stat1-label').textContent = t.stat1;
+  document.getElementById('stat2-label').textContent = t.stat2;
+  document.getElementById('stat3-label').textContent = t.stat3;
+  document.getElementById('section-title').textContent = t.section;
+  document.getElementById('contact-title').textContent = t.contact_title;
+  document.getElementById('contact-sub').textContent = t.contact_sub;
+  document.getElementById('label-phone').textContent = t.label_phone;
+  document.getElementById('label-wechat').textContent = t.label_wechat;
+  document.getElementById('label-address').textContent = t.label_address;
+  document.getElementById('address-value').textContent = t.address;
+  document.getElementById('bnav-label-home').textContent = t.nav_home;
+  document.getElementById('bnav-label-contact').textContent = t.nav_contact;
+
+  // 重新渲染房源
+  const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'ALL';
+  renderFilters(activeFilter);
+  renderCards(activeFilter);
+}
+
+// ============================================================
+// 加载数据
+// ============================================================
 async function loadData() {
-  if (SCRIPT_URL === "YOUR_APPS_SCRIPT_URL") { loadDemoData(); return; }
   try {
     const res = await fetch(`${SCRIPT_URL}?action=getAll`);
     const data = await res.json();
     allProperties = (data.properties || []).map((p, i) => ({ ...p, _index: i }));
-    renderFilters();
-    renderCards('全部');
+    renderFilters('ALL');
+    renderCards('ALL');
   } catch (e) {
     document.getElementById('prop-list').innerHTML = `
       <div class="error-state">
         <div class="error-icon">⚠️</div>
-        <div class="error-text">数据加载失败，请检查 SCRIPT_URL<br><small>${e.message}</small></div>
+        <div class="error-text">${i18n[currentLang].err}<br><small>${e.message}</small></div>
       </div>`;
   }
 }
 
-function renderFilters() {
-  const types = ['全部', ...new Set(allProperties.map(p => p.type).filter(Boolean))];
+// ============================================================
+// 筛选按钮
+// ============================================================
+function renderFilters(activeFilter) {
+  const t = i18n[currentLang];
+  const types = [...new Set(allProperties.map(p => p.type).filter(Boolean))];
   const rooms = [...new Set(allProperties.map(p => p.rooms).filter(Boolean))];
-  document.getElementById('filter-bar').innerHTML = [...types, ...rooms].map((f, i) =>
-    `<button class="filter-btn ${i===0?'active':''}" onclick="filterProps(this,'${f}')">${f}</button>`
-  ).join('');
+  const all = [
+    `<button class="filter-btn ${activeFilter==='ALL'?'active':''}" data-filter="ALL" onclick="filterProps(this,'ALL')">${t.filter_all}</button>`,
+    ...types.map(f => `<button class="filter-btn ${activeFilter===f?'active':''}" data-filter="${f}" onclick="filterProps(this,'${f}')">${f}</button>`),
+    ...rooms.map(f => `<button class="filter-btn ${activeFilter===f?'active':''}" data-filter="${f}" onclick="filterProps(this,'${f}')">${f}</button>`),
+  ];
+  document.getElementById('filter-bar').innerHTML = all.join('');
 }
 
+// ============================================================
+// 房源卡片
+// ============================================================
 const emojiColors = ['linear-gradient(135deg,#667eea,#764ba2)','linear-gradient(135deg,#11998e,#38ef7d)','linear-gradient(135deg,#f7971e,#ffd200)','linear-gradient(135deg,#f093fb,#f5576c)','linear-gradient(135deg,#4facfe,#00f2fe)','linear-gradient(135deg,#43e97b,#38f9d7)'];
 const emojis = ['🏙️','🌿','🌃','🌸','🏡','🏢'];
 
 function badgeClass(type) {
   if (!type) return 'badge-sale';
-  if (type.includes('租')) return 'badge-rent';
-  if (type.includes('新')) return 'badge-new';
+  if (type.includes('租') || type.toLowerCase().includes('rent')) return 'badge-rent';
+  if (type.includes('新') || type.toLowerCase().includes('new')) return 'badge-new';
   return 'badge-sale';
 }
 
 function renderCards(filter) {
-  const list = filter === '全部' ? allProperties : allProperties.filter(p => p.type === filter || p.rooms === filter);
-  document.getElementById('prop-count').textContent = `共 ${list.length} 套`;
+  const t = i18n[currentLang];
+  const list = filter === 'ALL' ? allProperties : allProperties.filter(p => p.type === filter || p.rooms === filter);
+  document.getElementById('prop-count').textContent = t.count(list.length);
   if (!list.length) {
-    document.getElementById('prop-list').innerHTML = `<div class="error-state"><div class="error-icon">🔍</div><div class="error-text">暂无符合条件的房源</div></div>`;
+    document.getElementById('prop-list').innerHTML = `<div class="error-state"><div class="error-icon">🔍</div><div class="error-text">${t.no_data}</div></div>`;
     return;
   }
   document.getElementById('prop-list').innerHTML = `<div class="properties">${list.map((p, i) => {
     const color = emojiColors[i % emojiColors.length];
     const emoji = emojis[i % emojis.length];
     const images = p.images || [];
-    const coverHtml = images.length > 0
+    const cover = images.length > 0
       ? `<img src="${images[0]}" alt="${p.title}" onerror="this.parentNode.innerHTML='<div class=prop-cover-placeholder style=background:${color}>${emoji}</div>'">`
       : `<div class="prop-cover-placeholder" style="background:${color}">${emoji}</div>`;
-    const photoCountHtml = images.length > 1
-      ? `<div class="photo-count">📷 ${images.length}</div>` : '';
-    const tags = p.tags ? p.tags.split('，').map(t=>`<span class="prop-tag">${t.trim()}</span>`).join('') : '';
+    const photoTag = images.length > 1 ? `<div class="photo-count">📷 ${images.length}</div>` : '';
+    const tags = p.tags ? p.tags.split('，').map(tag => `<span class="prop-tag">${tag.trim()}</span>`).join('') : '';
     return `
       <div class="prop-card" style="animation-delay:${i*0.07}s" onclick="showDetail(${p._index})">
-        <div class="prop-cover">
-          ${coverHtml}
-          <div class="prop-badge ${badgeClass(p.type)}">${p.type||'出售'}</div>
-          ${photoCountHtml}
-        </div>
+        <div class="prop-cover">${cover}<div class="prop-badge ${badgeClass(p.type)}">${p.type||''}</div>${photoTag}</div>
         <div class="prop-body">
           <div class="prop-title">${p.title}</div>
           <div class="prop-address">📍 ${p.address||''}</div>
           <div class="prop-tags">${tags}</div>
           <div class="prop-footer">
             <div class="prop-price">${p.price}<span> ${p.priceUnit||''}</span></div>
-            <div class="prop-area">建面 ${p.area||''}</div>
+            <div class="prop-area">${p.area||''}</div>
           </div>
         </div>
       </div>`;
@@ -337,12 +468,9 @@ function filterProps(btn, filter) {
   renderCards(filter);
 }
 
-// ===== 轮播逻辑 =====
-let carouselIndex = 0;
-let carouselImages = [];
-let touchStartX = 0;
-let touchStartY = 0;
-
+// ============================================================
+// 轮播
+// ============================================================
 function buildCarousel(images, color, emoji) {
   if (!images || images.length === 0) {
     return `<div class="carousel"><div class="carousel-placeholder" style="background:${color}">${emoji}</div></div>`;
@@ -350,19 +478,10 @@ function buildCarousel(images, color, emoji) {
   const slides = images.map(url =>
     `<div class="carousel-slide"><img src="${url}" draggable="false" onerror="this.parentNode.style.background='${color}';this.outerHTML='<span style=font-size:56px>${emoji}</span>'"></div>`
   ).join('');
-  const dots = images.length > 1
-    ? `<div class="carousel-dots">${images.map((_, i) => `<div class="carousel-dot ${i===0?'active':''}" onclick="goToSlide(${i})"></div>`).join('')}</div>`
-    : '';
+  const dots = images.length > 1 ? `<div class="carousel-dots">${images.map((_,i)=>`<div class="carousel-dot ${i===0?'active':''}" onclick="goToSlide(${i})"></div>`).join('')}</div>` : '';
   const arrows = images.length > 1
-    ? `<button class="carousel-btn prev" onclick="carouselPrev()">‹</button>
-       <button class="carousel-btn next" onclick="carouselNext()">›</button>
-       <div class="carousel-counter">1 / ${images.length}</div>`
-    : '';
-  return `
-    <div class="carousel" id="carousel" ontouchstart="onTouchStart(event)" ontouchend="onTouchEnd(event)">
-      <div class="carousel-track" id="carouselTrack">${slides}</div>
-      ${dots}${arrows}
-    </div>`;
+    ? `<button class="carousel-btn prev" onclick="carouselPrev()">‹</button><button class="carousel-btn next" onclick="carouselNext()">›</button><div class="carousel-counter">1 / ${images.length}</div>` : '';
+  return `<div class="carousel" id="carousel" ontouchstart="onTouchStart(event)" ontouchend="onTouchEnd(event)"><div class="carousel-track" id="carouselTrack">${slides}</div>${dots}${arrows}</div>`;
 }
 
 function goToSlide(index) {
@@ -373,55 +492,49 @@ function goToSlide(index) {
   const counter = document.querySelector('.carousel-counter');
   if (counter) counter.textContent = `${carouselIndex + 1} / ${carouselImages.length}`;
 }
-
 function carouselPrev() { goToSlide(carouselIndex - 1); }
 function carouselNext() { goToSlide(carouselIndex + 1); }
-
-function onTouchStart(e) {
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
-}
+function onTouchStart(e) { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }
 function onTouchEnd(e) {
   const dx = e.changedTouches[0].clientX - touchStartX;
   const dy = e.changedTouches[0].clientY - touchStartY;
-  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-    dx < 0 ? carouselNext() : carouselPrev();
-  }
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) { dx < 0 ? carouselNext() : carouselPrev(); }
 }
 
+// ============================================================
+// 详情页
+// ============================================================
 function showDetail(index) {
   const p = allProperties[index];
+  const t = i18n[currentLang];
   const color = emojiColors[index % emojiColors.length];
   const emoji = emojis[index % emojis.length];
   carouselImages = p.images || [];
   carouselIndex = 0;
-
   document.getElementById('detail-nav-title').textContent = p.title;
   const features = p.features ? p.features.split('，').map(f=>`<span class="detail-feature">${f.trim()}</span>`).join('') : '';
-
   document.getElementById('detail-body').innerHTML = `
     ${buildCarousel(carouselImages, color, emoji)}
     <div class="detail-content">
-      <div class="prop-badge ${badgeClass(p.type)}" style="display:inline-block;margin-bottom:10px">${p.type||'出售'}</div>
+      <div class="prop-badge ${badgeClass(p.type)}" style="display:inline-block;margin-bottom:10px">${p.type||''}</div>
       <div class="detail-title">${p.title}</div>
       <div class="detail-price">${p.price}<span> ${p.priceUnit||''}</span></div>
       <div class="detail-info-grid">
-        <div class="info-item"><div class="info-label">建筑面积</div><div class="info-value">${p.area||'—'}</div></div>
-        <div class="info-item"><div class="info-label">楼层</div><div class="info-value">${p.floor||'—'}</div></div>
-        <div class="info-item"><div class="info-label">建成年份</div><div class="info-value">${p.year||'—'}</div></div>
-        <div class="info-item"><div class="info-label">朝向</div><div class="info-value">${p.orientation||'—'}</div></div>
+        <div class="info-item"><div class="info-label">${t.detail_area}</div><div class="info-value">${p.area||'—'}</div></div>
+        <div class="info-item"><div class="info-label">${t.detail_floor}</div><div class="info-value">${p.floor||'—'}</div></div>
+        <div class="info-item"><div class="info-label">${t.detail_year}</div><div class="info-value">${p.year||'—'}</div></div>
+        <div class="info-item"><div class="info-label">${t.detail_orient}</div><div class="info-value">${p.orientation||'—'}</div></div>
       </div>
       <div class="detail-section">
-        <div class="detail-section-title">房源描述</div>
-        <div class="detail-desc">${p.desc||'暂无描述'}</div>
+        <div class="detail-section-title">${t.detail_desc}</div>
+        <div class="detail-desc">${p.desc||'—'}</div>
       </div>
-      ${features ? `<div class="detail-section"><div class="detail-section-title">配套设施</div><div class="detail-features">${features}</div></div>` : ''}
+      ${features ? `<div class="detail-section"><div class="detail-section-title">${t.detail_feat}</div><div class="detail-features">${features}</div></div>` : ''}
       <div class="detail-cta">
-        <button class="btn-primary" onclick="showTab('contact')">📞 立即咨询</button>
-        <button class="btn-secondary" onclick="backToList()">← 返回列表</button>
+        <button class="btn-primary" onclick="showTab('contact')">${t.btn_enquire}</button>
+        <button class="btn-secondary" onclick="backToList()">${t.btn_back}</button>
       </div>
     </div>`;
-
   document.getElementById('screen-detail').style.display = 'block';
   document.getElementById('screen-home').style.display = 'none';
   document.getElementById('mainNav').style.display = 'none';
@@ -440,25 +553,12 @@ function showTab(tab) {
   ['home','contact'].forEach(t => {
     document.getElementById('screen-'+t).classList.remove('active');
     document.getElementById('bnav-'+t)?.classList.remove('active');
+    document.getElementById('nav-tab-'+t)?.classList.remove('active');
   });
-  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
   document.getElementById('screen-'+tab).classList.add('active');
   document.getElementById('bnav-'+tab)?.classList.add('active');
-  document.querySelectorAll('.nav-tab')[tab==='home'?0:1]?.classList.add('active');
+  document.getElementById('nav-tab-'+tab)?.classList.add('active');
   window.scrollTo(0, 0);
-}
-
-function loadDemoData() {
-  allProperties = [
-    { _index:0, title:'阳光花园 3室2厅', address:'静安区延平路168号', type:'出售', rooms:'3室', tags:'南北通透，精装修，近地铁', price:'580', priceUnit:'万元', area:'118㎡', floor:'12/18层', year:'2018年', orientation:'南北', desc:'南北通透，采光极佳，精装修交付，拎包即住。距地铁2号线步行5分钟。', features:'电梯房，有车位，近学校，近地铁',
-      images:['https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800','https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800','https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=800'] },
-    { _index:1, title:'翠湖名苑 2室1厅', address:'徐汇区衡山路56号', type:'出租', rooms:'2室', tags:'拎包入住，月付，近商圈', price:'6800', priceUnit:'/月', area:'78㎡', floor:'8/24层', year:'2015年', orientation:'南', desc:'整租房源，家具家电齐全，拎包入住。朝南户型采光好，楼下商圈生活便利。', features:'全装修，家具齐全，家电齐全，独立厨卫',
-      images:['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800','https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800'] },
-    { _index:2, title:'江畔豪苑 3室2厅', address:'浦东新区滨江大道888号', type:'新房', rooms:'3室', tags:'江景房，新房，低密度', price:'1280', priceUnit:'万元', area:'156㎡', floor:'20/32层', year:'2024年', orientation:'东南', desc:'直面黄浦江，270°全景视野，高层豪装限量发售。', features:'江景，空中泳池，豪装，停车场',
-      images:['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800','https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800','https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800','https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800'] },
-  ];
-  renderFilters();
-  renderCards('全部');
 }
 
 loadData();
