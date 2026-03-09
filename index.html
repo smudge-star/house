@@ -194,7 +194,7 @@
       </div>
       <div class="contact-arrow">›</div>
     </a>
-    <a class="contact-card" href="mailto:luminaproperties@yahoo.com">
+    <a class="contact-card" href="/cdn-cgi/l/email-protection#345841595d5a5544465b445146405d5147744d555c5b5b1a575b59">
       <div class="contact-icon">✉️</div>
       <div class="contact-info">
         <div class="contact-label">Email</div>
@@ -234,7 +234,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ★ 把下面换成你的 Cloudflare Worker 网址
 const SCRIPT_URL = "https://lingering-shadow-322d.xliueu.workers.dev";
 
@@ -412,12 +412,7 @@ function renderFilters(activeFilter) {
   const all = [
     `<button class="filter-btn ${activeFilter==='ALL'?'active':''}" data-filter="ALL" onclick="filterProps(this,'ALL')">${t.filter_all}</button>`,
     ...types.map(f => `<button class="filter-btn ${activeFilter===f?'active':''}" data-filter="${f}" onclick="filterProps(this,'${f}')">${f}</button>`),
-    ...rooms.map(f => `<button class="filter-btn ${activeFilter===f?'active':''}" data-filter="${f}" onclick="filterProps(this,'${f}')">${f}</button>`),
-  ];
-  document.getElementById('filter-bar').innerHTML = all.join('');
-}
-
-// ============================================================
+    ...rooms.map(f => `<button class="filter-btn ${activeFilter===f?'active':''}" data-filter="${f}" onclick="filterProps(this,'${f==
 // 房源卡片
 // ============================================================
 const emojiColors = ['linear-gradient(135deg,#667eea,#764ba2)','linear-gradient(135deg,#11998e,#38ef7d)','linear-gradient(135deg,#f7971e,#ffd200)','linear-gradient(135deg,#f093fb,#f5576c)','linear-gradient(135deg,#4facfe,#00f2fe)','linear-gradient(135deg,#43e97b,#38f9d7)'];
@@ -556,4 +551,13 @@ function showTab(tab) {
     document.getElementById('bnav-'+t)?.classList.remove('active');
     document.getElementById('nav-tab-'+t)?.classList.remove('active');
   });
-  docume
+  document.getElementById('screen-'+tab).classList.add('active');
+  document.getElementById('bnav-'+tab)?.classList.add('active');
+  document.getElementById('nav-tab-'+tab)?.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+loadData();
+</script>
+</body>
+</html>
