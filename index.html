@@ -235,7 +235,8 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbys9ruWVge4OeIDXRe9bvKBVa5Wb1WGdRq6SzMr0DsR6tSIM2f_qMbp1Cz-6-jKJ-wF/exec";
+// ★ 把下面换成你的 Cloudflare Worker 网址
+const SCRIPT_URL = "https://lingering-shadow-322d.xliueu.workers.dev/";
 
 // ============================================================
 // 翻译字典
@@ -387,7 +388,7 @@ function setLang(lang) {
 // ============================================================
 async function loadData() {
   try {
-    const res = await fetch(`${SCRIPT_URL}?action=getAll`);
+    const res = await fetch(SCRIPT_URL);
     const data = await res.json();
     allProperties = (data.properties || []).map((p, i) => ({ ...p, _index: i }));
     renderFilters('ALL');
