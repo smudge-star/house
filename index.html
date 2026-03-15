@@ -132,23 +132,6 @@
   .search-btn:hover { background: var(--red-hover); }
   .search-btn svg { width: 16px; height: 16px; fill: #fff; }
 
-  /* ===== STATS BAR ===== */
-  .stats-bar {
-    display: flex; justify-content: center; gap: 0;
-    background: var(--white); border-bottom: 1px solid var(--border);
-    padding: 16px 0;
-  }
-  .stat {
-    flex: 0 0 auto; text-align: center; padding: 0 24px;
-    border-right: 1px solid var(--border);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700;
-    color: var(--dark);
-  }
-  .stat-label { font-size: 11px; color: var(--soft); margin-top: 2px; }
-
   /* ===== FILTER BAR ===== */
   .filter-bar {
     padding: 14px 16px 6px; display: flex; gap: 8px;
@@ -404,13 +387,6 @@
     </div>
   </div>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat"><div class="stat-num">200+</div><div class="stat-label" id="stat1-label">在售房源</div></div>
-    <div class="stat"><div class="stat-num">8</div><div class="stat-label" id="stat2-label">年從業經驗</div></div>
-    <div class="stat"><div class="stat-num">98%</div><div class="stat-label" id="stat3-label">客戶好評</div></div>
-  </div>
-
   <!-- FILTER + LISTINGS -->
   <div class="filter-bar" id="filter-bar">
     <button class="filter-btn active" data-filter="ALL" onclick="filterProps(this,'ALL')">全部</button>
@@ -572,9 +548,6 @@ function setLang(lang) {
   document.getElementById('nav-tab-contact').textContent = t.nav_contact;
   document.getElementById('hero-title').innerHTML = t.hero_title;
   document.getElementById('hero-desc').textContent = t.hero_desc;
-  document.getElementById('stat1-label').textContent = t.stat1;
-  document.getElementById('stat2-label').textContent = t.stat2;
-  document.getElementById('stat3-label').textContent = t.stat3;
   document.getElementById('section-title').textContent = t.section;
   document.getElementById('contact-title').textContent = t.contact_title;
   document.getElementById('contact-sub').textContent = t.contact_sub;
@@ -657,11 +630,9 @@ function onSearch() {
 // ============================================================
 function renderFilters(activeFilter) {
   const t = i18n[currentLang];
-  const types = [...new Set(allProperties.map(p=>p.type).filter(Boolean))];
   const rooms = [...new Set(allProperties.map(p=>p.rooms).filter(Boolean))];
   const all = [
     `<button class="filter-btn ${activeFilter==='ALL'?'active':''}" data-filter="ALL" onclick="filterProps(this,'ALL')">${t.filter_all}</button>`,
-    ...types.map(f=>`<button class="filter-btn ${activeFilter===f?'active':''}" data-filter="${f}" onclick="filterProps(this,'${f}')">${f}</button>`),
     ...rooms.map(f=>`<button class="filter-btn ${activeFilter===f?'active':''}" data-filter="${f}" onclick="filterProps(this,'${f}')">${f}</button>`),
   ];
   document.getElementById('filter-bar').innerHTML = all.join('');
